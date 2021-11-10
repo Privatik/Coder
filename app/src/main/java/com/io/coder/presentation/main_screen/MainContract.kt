@@ -1,4 +1,4 @@
-package com.io.coder.presentation.main_screen.components
+package com.io.coder.presentation.main_screen
 
 
 data class MainState(

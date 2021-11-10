@@ -10,3 +10,5 @@ val PaddingMedium = 20.dp
 
 val SpaceSmall = 5.dp
 val SpacePostSmall = 10.dp
+
+val SizePictureMedium = 80.dp

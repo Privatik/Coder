@@ -29,7 +29,9 @@ import com.io.coder.presentation.theme.SpacePostSmall
 fun SearchField(
     searchText: String,
     onChangeSearchText: (String) -> Unit,
-    onClickSortButton: () -> Unit
+    onClickSortButton: () -> Unit,
+    onClickCancelButtonInSearchField: () -> Unit,
+    onClickCancelButton: () -> Unit
 ){
 
     val searchMode = searchText.isNotBlank()
@@ -39,12 +41,17 @@ fun SearchField(
 
     Row(
         modifier = Modifier
-            .padding(PaddingMedium),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(
+                top = PaddingMedium,
+                start = PaddingMedium,
+                end = PaddingMedium,
+                bottom = PaddingMedium / 2
+            ),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         TextField(
             modifier = Modifier
-                .fillMaxWidth(if (focusMode.value) 0.75f else 1f)
+                .fillMaxWidth(if (focusMode.value) 0.7f else 1f)
                 .clip(MaterialTheme.shapes.large)
                 .background(MaterialTheme.colors.secondary)
                 .onFocusChanged {
@@ -56,7 +63,7 @@ fun SearchField(
             },
             leadingIcon = {
                 Icon(
-                    imageVector = Icons.Default.Search,
+                    painter = painterResource(id = R.drawable.ic_search),
                     contentDescription = "Search",
                     tint =
                     if (focusMode.value) MaterialTheme.colors.onPrimary
@@ -73,9 +80,9 @@ fun SearchField(
                         )
                     }
                 } else if (searchMode){
-                    IconButton(onClick = { onClickSortButton() }) {
+                    IconButton(onClick = { onClickCancelButtonInSearchField() }) {
                         Icon(
-                            imageVector = Icons.Default.Cancel,
+                            painter = painterResource(id = R.drawable.ic_cancel),
                             contentDescription = "Cancel",
                             tint = MaterialTheme.colors.primaryVariant
                         )
@@ -90,7 +97,7 @@ fun SearchField(
         if (focusMode.value){
             Spacer(modifier = Modifier.weight(SpacePostSmall.value))
             Button(
-                onClick = { },
+                onClick = { onClickCancelButton() },
                 elevation = ButtonDefaults.elevation(
                     0.dp,
                     0.dp,
@@ -114,7 +121,9 @@ fun PreviewSearchField(){
         SearchField(
             searchText = "",
             onChangeSearchText = {},
-            onClickSortButton = {}
+            onClickSortButton = {},
+            onClickCancelButtonInSearchField = {},
+            onClickCancelButton = {}
         )
     }
 }

@@ -3,8 +3,6 @@ package com.io.coder.presentation.main_screen
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.io.coder.presentation.main_screen.components.MainAction
-import com.io.coder.presentation.main_screen.components.MainState
 import com.io.coder.util.HandlerAction
 
 class MainViewModel(

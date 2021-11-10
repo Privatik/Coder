@@ -4,4 +4,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="whites">#F7F7F8</color>
-</resources>
+
+
+    <color name="gradient_start">#FAFAFA</color>
+    <color name="gradient_end">#81FAFAFA</color>resources>
+
+
+
+
