@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import com.io.coder.presentation.theme.CoderTheme
+import com.io.coder.presentation.util.Navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +14,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CoderTheme {
                 Surface(color = MaterialTheme.colors.background) {
+                    Navigation(activity = this)
                 }
             }
         }
