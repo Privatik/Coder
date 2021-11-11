@@ -73,7 +73,7 @@ fun ItemEmployee(
                 fontSize = 16.sp,
                 color = MaterialTheme.colors.onPrimary,
             )
-            Spacer(modifier = Modifier.height(SpacePostSmall))
+            Spacer(modifier = Modifier.height(SpaceSmall))
             Text(
                 modifier =
                 if (department == null) {
@@ -91,7 +91,7 @@ fun ItemEmployee(
                 } else Modifier,
                 text = department?.title ?: "",
                 fontSize = 12.sp,
-                color = MaterialTheme.colors.onPrimary,
+                color = MaterialTheme.colors.primary,
             )
         }
     }

@@ -4,4 +4,7 @@
     <string name="try_again">Попробовать снова</string>
     <string name="try_to_fix_it">Постараемся быстро починить</string>
     <string name="broke_everything">Какой-то сверхразум все сломал</string>
+    <string name="sort">Сортировка</string>
+    <string name="abc">По алфавиту</string>
+    <string name="birth_day">По дню рождения</string>
 </resources>

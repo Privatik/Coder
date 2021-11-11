@@ -65,7 +65,7 @@ fun DepartmentTabs(
                                 if (index == pagerState.currentPage)
                                     MaterialTheme.colors.onPrimary
                                 else
-                                    MaterialTheme.colors.primaryVariant
+                                    MaterialTheme.colors.secondaryVariant
                             )
                         }
                     )

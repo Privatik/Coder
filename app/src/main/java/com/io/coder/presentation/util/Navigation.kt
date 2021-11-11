@@ -28,11 +28,5 @@ fun Navigation(activity: ComponentActivity){
         composable(Screen.CoderScreen.route){
 
         }
-
-        composable(Screen.ErrorScreen.route){
-            ErrorScreen(
-                navController = navController
-            )
-        }
     }
 }

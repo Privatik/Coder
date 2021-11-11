@@ -1,6 +1,7 @@
 package com.io.coder.presentation.error_screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -51,6 +52,9 @@ fun ErrorScreen(
                 0.dp,
                 0.dp,
                 0.dp
+            ),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colors.background
             ),
             onClick = { }) {
             Text(
