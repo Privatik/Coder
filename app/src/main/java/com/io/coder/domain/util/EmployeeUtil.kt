@@ -40,3 +40,24 @@ fun List<Employee>.filterByDepartment(department: Department): List<Employee>{
     if (department == Department.ALL) return this
     return this.filter { it.department == department }
 }
+
+fun List<Employee>.filterBySearch(searchText: String): List<Employee>{
+    var list = emptyList<Employee>()
+    searchText.split(" +").forEach { str ->
+        if (list.isEmpty()){
+            list = this.filter {
+                it.firstName.contains(str, true)
+                        || it.lastName.contains(str, true)
+                        || it.userTag.contains(str, true)
+            }
+        } else {
+            list.filter {
+                it.firstName.contains(str, true)
+                        || it.lastName.contains(str, true)
+                        || it.userTag.contains(str, true)
+            }
+        }
+    }
+
+    return list
+}

@@ -11,12 +11,10 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.io.coder.domain.state.Department
 import com.io.coder.domain.util.filterByDepartment
+import com.io.coder.domain.util.filterBySearch
 import com.io.coder.domain.util.tripleSortBirthDayAndNextYear
 import com.io.coder.presentation.error_screen.ErrorScreen
-import com.io.coder.presentation.main_screen.components.DepartmentTabs
-import com.io.coder.presentation.main_screen.components.ItemEmployee
-import com.io.coder.presentation.main_screen.components.ItemYear
-import com.io.coder.presentation.main_screen.components.SearchField
+import com.io.coder.presentation.main_screen.components.*
 import com.io.coder.presentation.main_screen.state.SortVariant
 
 @OptIn(ExperimentalPagerApi::class)
@@ -83,37 +81,29 @@ fun MainContent(
                         )
                     }
                 } else {
-                    if (sortVariant == SortVariant.ABC) {
-                        items(
-                            state.employees
-                                .filterByDepartment(tabsList[page])
-                                .sortedBy { it.firstName })
-                        { employee ->
-                            ItemEmployee(
-                                name = "${employee.firstName} ${employee.lastName}",
-                                department = employee.department,
-                                urlImageEmployee = employee.avatarUrl,
-                                userTag = employee.userTag,
-                                birthDay = null,
-                            )
-                        }
+                    val listEmployee = state.employees
+                        .filterByDepartment(tabsList[page])
+                        .filterBySearch(state.searchText)
+
+                    if (listEmployee.isEmpty()){
+                        item { NoFindEmployee() }
                     } else {
-                        val triple = state.employees.tripleSortBirthDayAndNextYear()
-                        items(triple.first.filterByDepartment(tabsList[page])) { employee ->
-                            ItemEmployee(
-                                name = "${employee.firstName} ${employee.lastName}",
-                                department = employee.department,
-                                urlImageEmployee = employee.avatarUrl,
-                                userTag = employee.userTag,
-                                birthDay = employee.birthday,
-                                isVisibleBirthDay = true
-                            )
-                        }
-                        if (triple.third != null){
-                            item {
-                                ItemYear(year = triple.third!!)
+                        if (sortVariant == SortVariant.ABC) {
+                            items(
+                                listEmployee
+                                    .sortedBy { it.firstName })
+                            { employee ->
+                                ItemEmployee(
+                                    name = "${employee.firstName} ${employee.lastName}",
+                                    department = employee.department,
+                                    urlImageEmployee = employee.avatarUrl,
+                                    userTag = employee.userTag,
+                                    birthDay = null,
+                                )
                             }
-                            items(triple.second.filterByDepartment(tabsList[page])){ employee ->
+                        } else {
+                            val triple = listEmployee.tripleSortBirthDayAndNextYear()
+                            items(triple.first) { employee ->
                                 ItemEmployee(
                                     name = "${employee.firstName} ${employee.lastName}",
                                     department = employee.department,
@@ -123,8 +113,24 @@ fun MainContent(
                                     isVisibleBirthDay = true
                                 )
                             }
+                            if (triple.third != null){
+                                item {
+                                    ItemYear(year = triple.third!!)
+                                }
+                                items(triple.second){ employee ->
+                                    ItemEmployee(
+                                        name = "${employee.firstName} ${employee.lastName}",
+                                        department = employee.department,
+                                        urlImageEmployee = employee.avatarUrl,
+                                        userTag = employee.userTag,
+                                        birthDay = employee.birthday,
+                                        isVisibleBirthDay = true
+                                    )
+                                }
+                            }
                         }
                     }
+
                 }
             }
         }

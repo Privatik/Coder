@@ -82,8 +82,7 @@ fun DepartmentTabs(
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ){
-                item {NoFindEmployee()}
-                //content(page)
+                content(page)
             }
         }
     }
