@@ -7,7 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.NavController
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.rememberPagerState
 import com.io.coder.domain.state.Department
+import com.io.coder.domain.util.filterByDepartment
 import com.io.coder.domain.util.tripleSortBirthDayAndNextYear
 import com.io.coder.presentation.error_screen.ErrorScreen
 import com.io.coder.presentation.main_screen.components.DepartmentTabs
@@ -16,6 +19,7 @@ import com.io.coder.presentation.main_screen.components.ItemYear
 import com.io.coder.presentation.main_screen.components.SearchField
 import com.io.coder.presentation.main_screen.state.SortVariant
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MainContent(
     navController: NavController,
@@ -42,6 +46,8 @@ fun MainContent(
         Department.ANALYTICS
     )
 
+    val pagerState = rememberPagerState(initialPage = 0)
+
     if (state.isError){
         ErrorScreen(navController = navController)
     } else {
@@ -49,7 +55,7 @@ fun MainContent(
             modifier = Modifier.fillMaxSize()
         ) {
             SearchField(
-                searchText = state.searchtext,
+                searchText = state.searchText,
                 onChangeSearchText = {
                     viewModel.listener(MainAction.ChangeText(it))
                 },
@@ -64,7 +70,8 @@ fun MainContent(
                 }
             )
             DepartmentTabs(
-                tabsList = tabsList
+                tabsList = tabsList,
+                pagerState = pagerState
             ) { page ->
                 if (state.employees.isEmpty()){
                     items(30){
@@ -77,7 +84,11 @@ fun MainContent(
                     }
                 } else {
                     if (sortVariant == SortVariant.ABC) {
-                        items(state.employees.sortedBy { it.firstName }) { employee ->
+                        items(
+                            state.employees
+                                .filterByDepartment(tabsList[page])
+                                .sortedBy { it.firstName })
+                        { employee ->
                             ItemEmployee(
                                 name = "${employee.firstName} ${employee.lastName}",
                                 department = employee.department,
@@ -88,7 +99,7 @@ fun MainContent(
                         }
                     } else {
                         val triple = state.employees.tripleSortBirthDayAndNextYear()
-                        items(triple.first) { employee ->
+                        items(triple.first.filterByDepartment(tabsList[page])) { employee ->
                             ItemEmployee(
                                 name = "${employee.firstName} ${employee.lastName}",
                                 department = employee.department,
@@ -102,7 +113,7 @@ fun MainContent(
                             item {
                                 ItemYear(year = triple.third!!)
                             }
-                            items(triple.second){ employee ->
+                            items(triple.second.filterByDepartment(tabsList[page])){ employee ->
                                 ItemEmployee(
                                     name = "${employee.firstName} ${employee.lastName}",
                                     department = employee.department,

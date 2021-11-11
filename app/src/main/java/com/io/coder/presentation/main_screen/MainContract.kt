@@ -1,20 +1,24 @@
 package com.io.coder.presentation.main_screen
 
 import com.io.coder.domain.model.Employee
+import com.io.coder.domain.state.Department
+import com.io.coder.presentation.main_screen.state.SortVariant
 
 
 data class MainState(
-    val searchtext: String,
+    val searchText: String,
     val isLoading: Boolean,
     val employees: List<Employee>,
-    val isError: Boolean
+    val isError: Boolean,
+    val sortVariant: SortVariant,
 ){
     companion object {
         fun initial() = MainState(
-            searchtext = "",
+            searchText = "",
             isLoading = false,
             employees = emptyList(),
-            isError = false
+            isError = false,
+            sortVariant = SortVariant.ABC
         )
     }
 
@@ -23,4 +27,6 @@ data class MainState(
 sealed class MainAction{
 
     class ChangeText(val searchText: String): MainAction()
+
+    class ChangeSortVariant(val sortVariant: SortVariant): MainAction()
 }

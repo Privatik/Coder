@@ -2,6 +2,7 @@ package com.io.coder.domain.util
 
 import com.io.coder.domain.model.BirthDay
 import com.io.coder.domain.model.Employee
+import com.io.coder.domain.state.Department
 import java.util.*
 
 fun List<Employee>.tripleSortBirthDayAndNextYear(): Triple<List<Employee>,List<Employee>,Int?>{
@@ -33,4 +34,9 @@ fun List<Employee>.tripleSortBirthDayAndNextYear(): Triple<List<Employee>,List<E
         sortList.subList(0, index + 1),
         year
     )
+}
+
+fun List<Employee>.filterByDepartment(department: Department): List<Employee>{
+    if (department == Department.ALL) return this
+    return this.filter { it.department == department }
 }

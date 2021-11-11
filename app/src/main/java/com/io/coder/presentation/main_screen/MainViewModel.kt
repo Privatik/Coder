@@ -44,7 +44,10 @@ class MainViewModel(
     override fun listener(action: MainAction) {
         when (action){
             is MainAction.ChangeText -> {
-                _state.value = state.value.copy(searchtext = action.searchText)
+                _state.value = state.value.copy(searchText = action.searchText)
+            }
+            is MainAction.ChangeSortVariant -> {
+                _state.value = state.value.copy(sortVariant = action.sortVariant)
             }
         }
     }

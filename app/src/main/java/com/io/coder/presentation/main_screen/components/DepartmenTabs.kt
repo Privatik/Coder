@@ -9,12 +9,14 @@ import androidx.compose.material.*
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.io.coder.domain.model.Employee
 import com.io.coder.domain.state.Department
@@ -25,10 +27,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun DepartmentTabs(
     tabsList: List<Department>,
+    pagerState: PagerState,
     content: LazyListScope.(Int) -> Unit
 ) {
-
-    val pagerState = rememberPagerState(initialPage = 0)
     val scope = rememberCoroutineScope()
 
     Column() {
@@ -73,20 +74,28 @@ fun DepartmentTabs(
             }
         )
 
-        HorizontalPager(state = pagerState, count = tabsList.size) { page ->
-            LazyColumn(){
+        HorizontalPager(
+            state = pagerState,
+            count = tabsList.size,
+            verticalAlignment = Alignment.Top
+        ) { page ->
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ){
                 content(page)
             }
         }
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Preview
 @Composable
 fun PreviewDepartmentTabs(){
     CoderTheme {
         DepartmentTabs(
-            tabsList = emptyList()
+            tabsList = emptyList(),
+            pagerState = rememberPagerState(initialPage = 0)
         ){
 
         }

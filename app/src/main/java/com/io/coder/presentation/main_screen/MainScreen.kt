@@ -25,6 +25,7 @@ fun MainScreen(
     navController: NavController,
     viewModel: MainViewModel
 ){
+    val state = viewModel.state.value
 
     val bottomState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
@@ -32,8 +33,6 @@ fun MainScreen(
         stringResource(id = R.string.abc),
         stringResource(id = R.string.birth_day)
     )
-
-    val selectedOption = remember { mutableStateOf(0) }
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -72,10 +71,14 @@ fun MainScreen(
                                 coroutineScope.launch {
                                     bottomState.animateTo(ModalBottomSheetValue.Hidden)
                                 }
-                                selectedOption.value = index
+                                viewModel.listener(
+                                    MainAction.ChangeSortVariant(
+                                        if (index == 0) SortVariant.ABC else SortVariant.BIRTHDAY
+                                    )
+                                )
                             }) {
                             Icon(
-                                painter = if (selectedOption.value == index){
+                                painter = if (state.sortVariant.index == index){
                                     painterResource(id = R.drawable.ic_selected)
                                 } else {
                                     painterResource(id = R.drawable.ic_unselected)
@@ -97,14 +100,10 @@ fun MainScreen(
         MainContent(
             navController = navController,
             viewModel = viewModel,
-            sortVariant = if (selectedOption.value == 0) SortVariant.ABC else SortVariant.BIRTHDAY,
+            sortVariant = state.sortVariant,
             onClickShowBottomSheet = {
                 coroutineScope.launch {
-                    if (!bottomState.isVisible) {
-                        bottomState.animateTo(ModalBottomSheetValue.HalfExpanded)
-                    } else {
-                        bottomState.hide()
-                    }
+                    bottomState.animateTo(ModalBottomSheetValue.HalfExpanded)
                 }
             }
         )
