@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.io.coder.presentation.error_screen.ErrorScreen
 import com.io.coder.presentation.main_screen.MainScreen
 import com.io.coder.presentation.main_screen.MainViewModel
 
@@ -15,7 +16,7 @@ fun Navigation(activity: ComponentActivity){
 
     NavHost(
         navController = navController,
-        startDestination = Screen.MainScreen.route){
+        startDestination = Screen.ErrorScreen.route){
 
         composable(Screen.MainScreen.route){
             MainScreen(
@@ -26,6 +27,12 @@ fun Navigation(activity: ComponentActivity){
 
         composable(Screen.CoderScreen.route){
 
+        }
+
+        composable(Screen.ErrorScreen.route){
+            ErrorScreen(
+                navController = navController
+            )
         }
     }
 }

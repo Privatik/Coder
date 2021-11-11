@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Coder</string>
     <string name="cancel">Отмена</string>
+    <string name="try_again">Попробовать снова</string>
+    <string name="try_to_fix_it">Постараемся быстро починить</string>
+    <string name="broke_everything">Какой-то сверхразум все сломал</string>
 </resources>
