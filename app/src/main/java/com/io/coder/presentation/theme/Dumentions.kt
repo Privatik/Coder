@@ -8,6 +8,7 @@ val PaddingPostSmall = 10.dp
 val PaddingPreMedium = 15.dp
 val PaddingMedium = 20.dp
 val PaddingPostMedium = 25.dp
+val PaddingLarge = 35.dp
 
 val TextMediumSize = 24.sp
 val TextPreMediumSize = 20.sp

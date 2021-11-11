@@ -73,7 +73,7 @@ fun MainContent(
                 tabsList = tabsList,
                 pagerState = pagerState
             ) { page ->
-                if (state.employees.isEmpty()){
+                if (state.isLoading){
                     items(30){
                         ItemEmployee(
                             name = null,

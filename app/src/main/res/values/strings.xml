@@ -7,4 +7,6 @@
     <string name="sort">Сортировка</string>
     <string name="abc">По алфавиту</string>
     <string name="birth_day">По дню рождения</string>
+    <string name="no_find">Мы никого не нашли</string>
+    <string name="try_to_adjust">Попробуй скорректировать запрос</string>
 </resources>
