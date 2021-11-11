@@ -3,6 +3,8 @@ package com.io.coder.presentation.main_screen.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
@@ -14,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.io.coder.domain.model.Employee
 import com.io.coder.domain.state.Department
 import com.io.coder.presentation.theme.CoderTheme
 import kotlinx.coroutines.launch
@@ -21,24 +24,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun DepartmentTabs(
-
+    tabsList: List<Department>,
+    content: LazyListScope.(Int) -> Unit
 ) {
-
-    val tabsList = listOf(
-        Department.ALL,
-        Department.ANDROID,
-        Department.IOS,
-        Department.FRONTEND,
-        Department.BACKEND,
-        Department.BACK_OFFICE,
-        Department.DESIGN,
-        Department.HR,
-        Department.PR,
-        Department.MANAGEMENT,
-        Department.QA,
-        Department.SUPPORT,
-        Department.ANALYTICS
-    )
 
     val pagerState = rememberPagerState(initialPage = 0)
     val scope = rememberCoroutineScope()
@@ -87,16 +75,8 @@ fun DepartmentTabs(
 
         HorizontalPager(state = pagerState, count = tabsList.size) { page ->
             LazyColumn(){
-                items(30){
-                    ItemEmployee(
-                        name = null,
-                        department = null,
-                        urlImageEmployee = null
-                    )
-                }
-
+                content(page)
             }
-
         }
     }
 }
@@ -105,6 +85,10 @@ fun DepartmentTabs(
 @Composable
 fun PreviewDepartmentTabs(){
     CoderTheme {
-       DepartmentTabs()
+       DepartmentTabs(
+           tabsList = emptyList()
+       ){
+
+       }
     }
 }

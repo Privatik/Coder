@@ -16,7 +16,7 @@ fun Navigation(activity: ComponentActivity){
 
     NavHost(
         navController = navController,
-        startDestination = Screen.ErrorScreen.route){
+        startDestination = Screen.MainScreen.route){
 
         composable(Screen.MainScreen.route){
             MainScreen(
