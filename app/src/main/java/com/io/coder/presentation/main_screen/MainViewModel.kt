@@ -21,7 +21,7 @@ class MainViewModel(
         loadEmployee()
     }
 
-    private fun loadEmployee(){
+   fun loadEmployee(){
         useCase().onEach { resourse ->
             when(resourse){
                 is Resource.Success -> {

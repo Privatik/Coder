@@ -4,11 +4,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.io.coder.domain.state.Department
 import com.io.coder.domain.util.filterByDepartment
 import com.io.coder.domain.util.filterBySearch
@@ -44,6 +48,7 @@ fun MainContent(
         Department.ANALYTICS
     )
 
+    val isRefreshing = remember { mutableStateOf(false) }
     val pagerState = rememberPagerState(initialPage = 0)
 
     if (state.isError){
@@ -69,7 +74,11 @@ fun MainContent(
             )
             DepartmentTabs(
                 tabsList = tabsList,
-                pagerState = pagerState
+                pagerState = pagerState,
+                isRefreshing = isRefreshing.value,
+                onRefresh = {
+                    isRefreshing.value = true
+                }
             ) { page ->
                 if (state.isLoading){
                     items(30){
@@ -132,6 +141,13 @@ fun MainContent(
                     }
 
                 }
+            }
+        }
+
+        LaunchedEffect(isRefreshing.value) {
+            if (isRefreshing.value) {
+                viewModel.loadEmployee()
+                isRefreshing.value = false
             }
         }
     }
