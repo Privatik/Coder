@@ -3,9 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Android dev/AndroidStudioProjects/Coder/app/src/main/res/drawable/bg_gradient_gray_to_white_horizontal.xml" value="0.15833333333333333" />
-        <entry key="..\:/Users/Android dev/AndroidStudioProjects/Coder/app/src/main/res/drawable/bg_gradient_gray_to_white_minus_45.xml" value="0.15833333333333333" />
+        <entry key="../../../../layout/compose-model-1636558192575.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1636562065925.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1636563525136.xml" value="0.17947635135135134" />
+        <entry key="../../../../layout/compose-model-1636563738715.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1636568396472.xml" value="0.17947635135135134" />
+        <entry key="../../../../layout/compose-model-1636570054221.xml" value="0.22870370370370371" />
+        <entry key="../../../../layout/compose-model-1636652791394.xml" value="0.2222222222222222" />
+        <entry key="../../../../layout/compose-model-1636655852470.xml" value="0.17947635135135134" />
+        <entry key="../../../../layout/compose-model-1636655862358.xml" value="0.25" />
         <entry key="..\:/Users/Android dev/AndroidStudioProjects/Coder/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22135416666666666" />
+        <entry key="app/src/main/res/drawable/bg_gradient_gray_to_white.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/bg_gradient_gray_to_white_horizontal.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/bg_gradient_gray_to_white_minus_45.xml" value="0.209375" />
       </map>
     </option>
   </component>

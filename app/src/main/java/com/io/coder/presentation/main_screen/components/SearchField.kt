@@ -102,6 +102,9 @@ fun SearchField(
                     0.dp,
                     0.dp,
                     0.dp
+                ),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colors.background
                 )
             ) {
                 Text(

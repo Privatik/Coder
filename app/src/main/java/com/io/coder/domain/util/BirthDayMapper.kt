@@ -25,7 +25,10 @@ fun getBirthDayFromString(dateSt: String): BirthDay?{
         sdf.parse(dateSt)?.let { date ->
             val cal = Calendar.getInstance()
             cal.time = date
-            BirthDay(cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH))
+            BirthDay(
+                day = cal.get(Calendar.DAY_OF_MONTH),
+                mount = cal.get(Calendar.MONTH)
+            )
         }
     }
 }
