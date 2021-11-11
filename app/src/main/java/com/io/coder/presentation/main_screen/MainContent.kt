@@ -67,14 +67,20 @@ fun MainContent(
                         ItemEmployee(
                             name = null,
                             department = null,
-                            urlImageEmployee = null)
+                            urlImageEmployee = null,
+                            birthDay = null
+                        )
                     }
                 } else {
                     items(state.employees){ employee ->
                         ItemEmployee(
                             name = "${employee.firstName} ${employee.lastName}",
                             department = employee.department,
-                            urlImageEmployee = employee.avatarUrl)
+                            urlImageEmployee = employee.avatarUrl,
+                            userTag = employee.userTag,
+                            birthDay = employee.birthday,
+                            isVisibleBirthDay = true
+                        )
                     }
                 }
             }

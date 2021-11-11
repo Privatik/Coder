@@ -85,10 +85,10 @@ fun DepartmentTabs(
 @Composable
 fun PreviewDepartmentTabs(){
     CoderTheme {
-       DepartmentTabs(
-           tabsList = emptyList()
-       ){
+        DepartmentTabs(
+            tabsList = emptyList()
+        ){
 
-       }
+        }
     }
 }
