@@ -1,4 +1,4 @@
-package com.io.coder.presentation.error_screen.model_parcelize
+package com.io.coder.presentation.main_screen.model_parcelize
 
 import android.os.Parcelable
 import com.io.coder.domain.model.BirthDay

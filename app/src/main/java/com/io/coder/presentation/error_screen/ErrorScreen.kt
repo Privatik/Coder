@@ -21,7 +21,7 @@ import com.io.coder.presentation.theme.SpaceSmall
 
 @Composable
 fun ErrorScreen(
-    navController: NavController
+    onClickTryAgain:() -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -56,7 +56,7 @@ fun ErrorScreen(
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colors.background
             ),
-            onClick = { }) {
+            onClick = { onClickTryAgain() }) {
             Text(
                 text = stringResource(id = R.string.try_again),
                 style = MaterialTheme.typography.h3,

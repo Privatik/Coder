@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.io.coder.R
+import com.io.coder.presentation.main_screen.state.SortVariant
 import com.io.coder.presentation.theme.CoderTheme
 import com.io.coder.presentation.theme.PaddingMedium
 import com.io.coder.presentation.theme.PaddingPostSmall
@@ -28,6 +29,7 @@ import com.io.coder.presentation.theme.SpacePostSmall
 @Composable
 fun SearchField(
     searchText: String,
+    sortVariant: SortVariant,
     onChangeSearchText: (String) -> Unit,
     onClickSortButton: () -> Unit,
     onClickCancelButtonInSearchField: () -> Unit,
@@ -76,7 +78,10 @@ fun SearchField(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_list_ui_alt),
                             contentDescription = "Sort",
-                            tint = MaterialTheme.colors.primaryVariant
+                            tint = if (sortVariant == SortVariant.ABC)
+                                MaterialTheme.colors.primaryVariant
+                                    else
+                                MaterialTheme.colors.onSecondary
                         )
                     }
                 } else if (searchMode){
@@ -123,6 +128,7 @@ fun PreviewSearchField(){
     CoderTheme {
         SearchField(
             searchText = "",
+            sortVariant = SortVariant.ABC,
             onChangeSearchText = {},
             onClickSortButton = {},
             onClickCancelButtonInSearchField = {},

@@ -1,13 +1,9 @@
 package com.io.coder.domain.util
 
 import com.io.coder.domain.model.BirthDay
-import com.io.coder.presentation.error_screen.model_parcelize.BirthDayParcelize
+import com.io.coder.presentation.main_screen.model_parcelize.BirthDayParcelize
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.Period
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 private var monthNames = arrayOf(
@@ -64,6 +60,10 @@ fun getYearTitle(
     year: Int
 ): String{
     val lastNumber = year % 10
+    if (year in 11 until 15){
+        return elseYear
+    }
+
     return when (lastNumber) {
         1 -> {
             oneYear

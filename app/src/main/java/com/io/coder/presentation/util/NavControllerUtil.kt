@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.os.Parcelable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
-import com.io.coder.domain.model.Employee
-import com.io.coder.presentation.error_screen.model_parcelize.toParcelize
-import com.io.coder.util.Constants.EMPLOYEE
 
 fun NavController.navigate(
     route: String,

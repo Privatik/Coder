@@ -1,10 +1,9 @@
 package com.io.coder.presentation.main_screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +35,13 @@ fun MainScreen(
 
     val coroutineScope = rememberCoroutineScope()
 
+    BackHandler(bottomState.isVisible) {
+        if (bottomState.isVisible){
+            coroutineScope.launch {
+                bottomState.animateTo(ModalBottomSheetValue.Hidden)
+            }
+        }
+    }
 
     ModalBottomSheetLayout(
         sheetBackgroundColor = MaterialTheme.colors.background,
@@ -46,7 +52,6 @@ fun MainScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.9f)
             ) {
                 Text(
                     modifier = Modifier
@@ -94,6 +99,7 @@ fun MainScreen(
                         )
                     }
                 }
+                Spacer(modifier = Modifier.height(SpaceLarge))
             }
         }
     ) {
@@ -103,7 +109,7 @@ fun MainScreen(
             sortVariant = state.sortVariant,
             onClickShowBottomSheet = {
                 coroutineScope.launch {
-                    bottomState.animateTo(ModalBottomSheetValue.HalfExpanded)
+                    bottomState.animateTo(ModalBottomSheetValue.Expanded)
                 }
             }
         )

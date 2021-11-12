@@ -12,4 +12,7 @@
     <string name="one_year">Год</string>
     <string name="from_two_to_four_year">Года</string>
     <string name="from_five_to_ten_year">Лет</string>
+    <string name="load">Секундочку, гружусь...</string>
+    <string name="error_network">Не могу обновить данные.\nПроверь соединение с интернетом.</string>
+    <string name="error_api">Не могу обновить данные.\nЧто-то пошло не так.</string>
 </resources>

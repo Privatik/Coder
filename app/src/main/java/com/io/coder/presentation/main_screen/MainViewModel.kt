@@ -26,16 +26,22 @@ class MainViewModel(
             when(resourse){
                 is Resource.Success -> {
                     _state.value = state.value.copy(
-                        isError = false,
+                        errorType = null,
                         isLoading = false,
                         employees = resourse.data!!
                     )
                 }
                 is Resource.Error -> {
-                    _state.value = MainState.initial().copy(isError = true)
+                    _state.value = state.value.copy(
+                        isLoading = false,
+                        errorType = resourse.type
+                    )
                 }
                 is Resource.Loading -> {
-                    _state.value = MainState.initial().copy(isLoading = true)
+                    _state.value = state.value.copy(
+                        isLoading = true,
+                        errorType = null
+                    )
                 }
             }
         }.launchIn(viewModelScope)

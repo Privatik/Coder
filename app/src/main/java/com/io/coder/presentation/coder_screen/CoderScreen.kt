@@ -29,7 +29,7 @@ import com.io.coder.R
 import com.io.coder.domain.util.getAge
 import com.io.coder.domain.util.getStringFullDate
 import com.io.coder.domain.util.getYearTitle
-import com.io.coder.presentation.error_screen.model_parcelize.EmployeeParcelize
+import com.io.coder.presentation.main_screen.model_parcelize.EmployeeParcelize
 import com.io.coder.presentation.theme.*
 import com.io.coder.presentation.util.Screen
 
