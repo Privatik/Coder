@@ -11,7 +11,8 @@ fun List<Employee>.tripleSortBirthDayAndNextYear(): Triple<List<Employee>,List<E
         year = it.get(Calendar.YEAR) + 1
         BirthDay(
             day = it.get(Calendar.DAY_OF_MONTH),
-            mount = it.get(Calendar.MONTH)
+            mount = it.get(Calendar.MONTH),
+            year = it.get(Calendar.YEAR)
         )
     }
     val sortList = this.sortedWith(

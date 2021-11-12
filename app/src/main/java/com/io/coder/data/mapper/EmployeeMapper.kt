@@ -8,7 +8,7 @@ import com.io.coder.domain.util.getBirthDayFromString
 fun EmployeeResponse.toModel(): Employee =
     Employee(
         avatarUrl = this.avatarUrl,
-        birthday = getBirthDayFromString(this.birthday) ?: BirthDay(0,0),
+        birthday = getBirthDayFromString(this.birthday) ?: BirthDay(0,0, 0),
         department = this.department.toModel(),
         firstName = this.firstName,
         id = this.id,

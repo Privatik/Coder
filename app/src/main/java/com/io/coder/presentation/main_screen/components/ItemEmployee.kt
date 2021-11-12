@@ -2,6 +2,7 @@ package com.io.coder.presentation.main_screen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
@@ -27,12 +28,13 @@ import com.io.coder.util.extends.gradientBackground
 
 @Composable
 fun ItemEmployee(
-    name:String?,
+    name:String? = null,
     userTag: String = "",
-    department: Department?,
-    urlImageEmployee: String?,
-    birthDay: BirthDay?,
-    isVisibleBirthDay: Boolean = false
+    department: Department? = null,
+    urlImageEmployee: String? = null,
+    birthDay: BirthDay? = null,
+    isVisibleBirthDay: Boolean = false,
+    onClick: () -> Unit = {}
 ){
     Row(
         modifier = Modifier
@@ -42,7 +44,10 @@ fun ItemEmployee(
                 start = PaddingPostSmall,
                 end = PaddingPostSmall,
                 bottom = PaddingSmall
-            ),
+            )
+            .clickable {
+                onClick()
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

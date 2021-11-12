@@ -9,4 +9,7 @@
     <string name="birth_day">По дню рождения</string>
     <string name="no_find">Мы никого не нашли</string>
     <string name="try_to_adjust">Попробуй скорректировать запрос</string>
+    <string name="one_year">Год</string>
+    <string name="from_two_to_four_year">Года</string>
+    <string name="from_five_to_ten_year">Лет</string>
 </resources>

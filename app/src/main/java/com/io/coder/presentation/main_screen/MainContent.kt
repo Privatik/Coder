@@ -12,14 +12,17 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.io.coder.domain.model.Employee
 import com.io.coder.domain.state.Department
 import com.io.coder.domain.util.filterByDepartment
 import com.io.coder.domain.util.filterBySearch
 import com.io.coder.domain.util.tripleSortBirthDayAndNextYear
 import com.io.coder.presentation.error_screen.ErrorScreen
+import com.io.coder.presentation.error_screen.model_parcelize.toParcelize
 import com.io.coder.presentation.main_screen.components.*
 import com.io.coder.presentation.main_screen.state.SortVariant
+import com.io.coder.presentation.util.Screen
+import com.io.coder.presentation.util.navigateC
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -51,7 +54,7 @@ fun MainContent(
     val isRefreshing = remember { mutableStateOf(false) }
     val pagerState = rememberPagerState(initialPage = 0)
 
-    if (state.isError){
+    if (state.isError && state.employees.isNotEmpty()){
         ErrorScreen(navController = navController)
     } else {
         Column(
@@ -82,12 +85,7 @@ fun MainContent(
             ) { page ->
                 if (state.isLoading){
                     items(30){
-                        ItemEmployee(
-                            name = null,
-                            department = null,
-                            urlImageEmployee = null,
-                            birthDay = null
-                        )
+                        ItemEmployee()
                     }
                 } else {
                     val listEmployee = state.employees
@@ -102,24 +100,22 @@ fun MainContent(
                                 listEmployee
                                     .sortedBy { it.firstName })
                             { employee ->
-                                ItemEmployee(
-                                    name = "${employee.firstName} ${employee.lastName}",
-                                    department = employee.department,
-                                    urlImageEmployee = employee.avatarUrl,
-                                    userTag = employee.userTag,
-                                    birthDay = null,
+                                ItemsEmployee(
+                                    employee = employee,
+                                    onClick = {
+                                        navController.navigate(employee)
+                                    }
                                 )
                             }
                         } else {
                             val triple = listEmployee.tripleSortBirthDayAndNextYear()
                             items(triple.first) { employee ->
-                                ItemEmployee(
-                                    name = "${employee.firstName} ${employee.lastName}",
-                                    department = employee.department,
-                                    urlImageEmployee = employee.avatarUrl,
-                                    userTag = employee.userTag,
-                                    birthDay = employee.birthday,
-                                    isVisibleBirthDay = true
+                                ItemsEmployee(
+                                    employee = employee,
+                                    isVisibleBirthDay = true,
+                                    onClick = {
+                                        navController.navigate(employee)
+                                    }
                                 )
                             }
                             if (triple.third != null){
@@ -127,13 +123,12 @@ fun MainContent(
                                     ItemYear(year = triple.third!!)
                                 }
                                 items(triple.second){ employee ->
-                                    ItemEmployee(
-                                        name = "${employee.firstName} ${employee.lastName}",
-                                        department = employee.department,
-                                        urlImageEmployee = employee.avatarUrl,
-                                        userTag = employee.userTag,
-                                        birthDay = employee.birthday,
-                                        isVisibleBirthDay = true
+                                    ItemsEmployee(
+                                        employee = employee,
+                                        isVisibleBirthDay = true,
+                                        onClick = {
+                                            navController.navigate(employee)
+                                        }
                                     )
                                 }
                             }
@@ -151,4 +146,28 @@ fun MainContent(
             }
         }
     }
+}
+
+fun NavController.navigate(employee: Employee){
+    navigateC(
+        route = Screen.CoderScreen.route,
+        arg = employee.toParcelize()
+    )
+}
+
+@Composable
+fun ItemsEmployee(
+    employee: Employee,
+    isVisibleBirthDay: Boolean = false,
+    onClick: () -> Unit
+){
+    ItemEmployee(
+        name = "${employee.firstName} ${employee.lastName}",
+        department = employee.department,
+        urlImageEmployee = employee.avatarUrl,
+        userTag = employee.userTag,
+        birthDay = if (isVisibleBirthDay) employee.birthday else null,
+        isVisibleBirthDay = isVisibleBirthDay,
+        onClick = {onClick()}
+    )
 }

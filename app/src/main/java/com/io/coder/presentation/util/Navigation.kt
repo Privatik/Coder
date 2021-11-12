@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.io.coder.presentation.error_screen.ErrorScreen
+import com.io.coder.presentation.coder_screen.CoderScreen
+import com.io.coder.presentation.error_screen.model_parcelize.EmployeeParcelize
 import com.io.coder.presentation.main_screen.MainScreen
 import com.io.coder.presentation.main_screen.MainViewModel
+import com.io.coder.util.Constants.EMPLOYEE
 
 @Composable
 fun Navigation(activity: ComponentActivity){
@@ -25,8 +27,15 @@ fun Navigation(activity: ComponentActivity){
             )
         }
 
-        composable(Screen.CoderScreen.route){
+        composable(
+            route = Screen.CoderScreen.route
+        ){ enty ->
+            val employeeParcelize: EmployeeParcelize = enty.rememberRequiredArgument()
 
+            CoderScreen(
+                navController = navController,
+                employee = employeeParcelize
+            )
         }
     }
 }
