@@ -81,6 +81,7 @@ fun MainContent(
             ) {
                 SearchField(
                     searchText = state.searchText,
+                    hint = stringResource(id = R.string.hint_search_field),
                     sortVariant = state.sortVariant,
                     onChangeSearchText = {
                         viewModel.listener(MainAction.ChangeText(it))
@@ -142,15 +143,15 @@ fun MainContent(
                                     item {
                                         ItemYear(year = triple.third!!)
                                     }
-                                    items(triple.second){ employee ->
-                                        ItemsEmployee(
-                                            employee = employee,
-                                            isVisibleBirthDay = true,
-                                            onClick = {
-                                                navController.navigate(employee)
-                                            }
-                                        )
-                                    }
+                                }
+                                items(triple.second){ employee ->
+                                    ItemsEmployee(
+                                        employee = employee,
+                                        isVisibleBirthDay = true,
+                                        onClick = {
+                                            navController.navigate(employee)
+                                        }
+                                    )
                                 }
                             }
                         }

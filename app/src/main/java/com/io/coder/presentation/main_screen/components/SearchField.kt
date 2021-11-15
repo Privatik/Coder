@@ -29,6 +29,7 @@ import com.io.coder.presentation.theme.SpacePostSmall
 @Composable
 fun SearchField(
     searchText: String,
+    hint: String,
     sortVariant: SortVariant,
     onChangeSearchText: (String) -> Unit,
     onClickSortButton: () -> Unit,
@@ -59,6 +60,14 @@ fun SearchField(
                 .onFocusChanged {
                     focusMode.value = it.isFocused
                 },
+            placeholder = {
+                if (!focusMode.value) {
+                    Text(
+                        text = hint,
+                        color = MaterialTheme.colors.primaryVariant
+                    )
+                }
+            },
             value = searchText,
             onValueChange = {
                 onChangeSearchText(it)
@@ -128,6 +137,7 @@ fun PreviewSearchField(){
     CoderTheme {
         SearchField(
             searchText = "",
+            hint = "Введи имя, тег, почту...",
             sortVariant = SortVariant.ABC,
             onChangeSearchText = {},
             onClickSortButton = {},

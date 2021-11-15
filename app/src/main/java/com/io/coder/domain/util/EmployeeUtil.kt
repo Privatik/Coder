@@ -6,7 +6,7 @@ import com.io.coder.domain.state.Department
 import java.util.*
 
 fun List<Employee>.tripleSortBirthDayAndNextYear(): Triple<List<Employee>,List<Employee>,Int?>{
-    var year: Int? = null
+    var year: Int
     val currentDay = Calendar.getInstance().let {
         year = it.get(Calendar.YEAR) + 1
         BirthDay(
@@ -23,16 +23,18 @@ fun List<Employee>.tripleSortBirthDayAndNextYear(): Triple<List<Employee>,List<E
     )
 
     val index = sortList.indexOfFirst {
-        currentDay.day < it.birthday.day && currentDay.mount <= it.birthday.mount
+        currentDay.mount <= it.birthday.mount && currentDay.day < it.birthday.day
     }
 
-    if (index == 0 || index == lastIndex){
+    if (index == 0){
         return Triple(sortList, emptyList(), null)
+    } else if (index == -1){
+        return Triple(emptyList(), sortList, year)
     }
 
     return Triple(
-        sortList.subList(index + 1, lastIndex),
-        sortList.subList(0, index + 1),
+        sortList.subList(index, size),
+        sortList.subList(0, index),
         year
     )
 }
